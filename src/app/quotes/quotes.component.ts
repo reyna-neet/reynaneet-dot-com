@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Quote } from '../quote';
-import { QUOTES } from '../mock-quotes';
+import { QuoteService } from '../quote.service';
 
 @Component({
   selector: 'app-quotes',
@@ -8,12 +8,19 @@ import { QUOTES } from '../mock-quotes';
   styleUrls: ['./quotes.component.scss']
 })
 export class QuotesComponent implements OnInit {
+  quotes: Quote[] = [];
+  displayQuote = {"text":"text you shouldn't see", 
+                  "source":"code's gotta compile somehow"};
   
-  displayQuote = QUOTES[0];
+  getQuotes(): void {
+    this.quotes = this.quoteService.getQuotes();
+    this.displayQuote = this.quotes[0];
+  }
 
-  constructor() { }
+  constructor(private quoteService: QuoteService) { }
 
   ngOnInit(): void {
+    this.getQuotes();
   }
 
 }
