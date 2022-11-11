@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { interval, Subscription } from 'rxjs';
 import { Quote } from '../quote';
 import { QuoteService } from '../quote.service';
 
@@ -8,19 +9,34 @@ import { QuoteService } from '../quote.service';
   styleUrls: ['./quotes.component.scss']
 })
 export class QuotesComponent implements OnInit {
+  QUOTE_CHANGE_DELAY = 10000;
+
   quotes: Quote[] = [];
-  displayQuote = {"text":"text you shouldn't see", 
-                  "source":"code's gotta compile somehow"};
+  displayQuoteIndex = 0;
+  quoteTimer: Subscription = interval(this.QUOTE_CHANGE_DELAY)
+                             .subscribe(val => this.nextQuote());
   
   getQuotes(): void {
     this.quotes = this.quoteService.getQuotes();
-    this.displayQuote = this.quotes[0];
+  }
+
+  nextQuote(): void {
+    if (this.displayQuoteIndex == this.quotes.length) {
+      this.displayQuoteIndex = 0;
+    }
+    else {
+      this.displayQuoteIndex++;
+    }
   }
 
   constructor(private quoteService: QuoteService) { }
 
   ngOnInit(): void {
     this.getQuotes();
+  }
+
+  ngOnDestroy(): void {
+    this.quoteTimer.unsubscribe();
   }
 
 }
