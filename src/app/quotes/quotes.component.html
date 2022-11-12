@@ -1,4 +1,8 @@
 <ul>
-  <p>"{{quotes[displayQuoteIndex].text}}" 
-  {{quotes[displayQuoteIndex].source}}</p>
+  <p id="quote" 
+     [@fadeAndReturn]="isVisible ? 'visible' : 'invisible'"
+     (@fadeAndReturn.done)="onQuoteFadeOut($event)">
+    "{{quotes[displayQuoteIndex].text}}" 
+    {{quotes[displayQuoteIndex].source}}
+  </p>
 </ul>
