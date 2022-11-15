@@ -38,7 +38,8 @@ export class QuotesComponent implements OnInit {
                              .subscribe(val => this.quoteFade());
   
   getQuotes(): void {
-    this.quotes = this.quoteService.getQuotes();
+    this.quoteService.getQuotes()
+        .subscribe(quotes => this.quotes = quotes);
   }
 
   quoteFade(): void {
