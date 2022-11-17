@@ -15,6 +15,9 @@ import { QuoteService } from '../quote.service';
       state('invisible', style({
         opacity: 0
       })),
+      transition('void => visible', [
+        animate(1000)
+      ]),
       transition('visible => invisible', [
         animate(1000)
       ]),
@@ -28,22 +31,30 @@ import { QuoteService } from '../quote.service';
 })
 
 export class QuotesComponent implements OnInit {
-  QUOTE_CHANGE_DELAY = 10000;
-  ANIMATION_LENGTH = 1000;
+  QUOTE_CHANGE_DELAY = 5000;
 
-  quotes: Quote[] = [];
+  quotes: Quote[] = [
+    { id: 999, text: 'Loading...', source: '' }
+  ];
   displayQuoteIndex = 0;
-  isVisible = true;
-  quoteTimer: Subscription = interval(this.QUOTE_CHANGE_DELAY)
-                             .subscribe(val => this.quoteFade());
-  
-  getQuotes(): void {
+  isVisible = false;
+  quoteTimer: Subscription = {} as Subscription;
+    
+  fetchQuotes(): void {
     this.quoteService.getQuotes()
-        .subscribe(quotes => this.quotes = quotes);
+        .subscribe(quotes => this.quotes = quotes,
+                  err => console.error('Error in Quotes component'),
+                  () => this.startTimer());
+  }
+
+  startTimer(): void {
+    this.isVisible = true;
+    this.quoteTimer = interval(this.QUOTE_CHANGE_DELAY)
+                      .subscribe(val => this.quoteFade());
   }
 
   quoteFade(): void {
-    this.isVisible = false;
+    this.isVisible = !this.isVisible;
   }
 
   onQuoteFadeOut(event: AnimationEvent) {
@@ -61,7 +72,7 @@ export class QuotesComponent implements OnInit {
   constructor(private quoteService: QuoteService) { }
 
   ngOnInit(): void {
-    this.getQuotes();
+    this.fetchQuotes();
   }
 
   ngOnDestroy(): void {
