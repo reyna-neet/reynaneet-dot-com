@@ -1,5 +1,6 @@
 <ul>
   <p id="quote" 
+     *ngIf="quotes.length"
      [@fadeAndReturn]="isVisible ? 'visible' : 'invisible'"
      (@fadeAndReturn.done)="onQuoteFadeOut($event)">
     "{{quotes[displayQuoteIndex].text}}"<br> 

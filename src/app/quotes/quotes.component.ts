@@ -9,6 +9,9 @@ import { QuoteService } from '../quote.service';
   selector: 'app-quotes',
   animations: [
     trigger('fadeAndReturn', [
+      state('void', style({
+        opacity: 0
+      })),
       state('visible', style({
         opacity: 1
       })),
@@ -33,11 +36,9 @@ import { QuoteService } from '../quote.service';
 export class QuotesComponent implements OnInit {
   QUOTE_CHANGE_DELAY = 5000;
 
-  quotes: Quote[] = [
-    { id: 999, text: 'Loading...', source: '' }
-  ];
+  quotes: Quote[] = [];
   displayQuoteIndex = 0;
-  isVisible = false;
+  isVisible = true;
   quoteTimer: Subscription = {} as Subscription;
     
   fetchQuotes(): void {
