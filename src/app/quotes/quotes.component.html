@@ -2,7 +2,7 @@
   <p id="quote" 
      [@fadeAndReturn]="isVisible ? 'visible' : 'invisible'"
      (@fadeAndReturn.done)="onQuoteFadeOut($event)">
-    "{{quotes[displayQuoteIndex].text}}" 
-    {{quotes[displayQuoteIndex].source}}
+    "{{quotes[displayQuoteIndex].text}}"<br> 
+    ~{{quotes[displayQuoteIndex].source}}
   </p>
 </ul>
