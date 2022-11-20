@@ -34,7 +34,7 @@ import { QuoteService } from '../quote.service';
 })
 
 export class QuotesComponent implements OnInit {
-  QUOTE_CHANGE_DELAY = 5000;
+  QUOTE_CHANGE_DELAY = 10000;
 
   quotes: Quote[] = [];
   displayQuoteIndex = 0;
