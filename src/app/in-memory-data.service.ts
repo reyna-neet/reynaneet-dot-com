@@ -8,11 +8,12 @@ import { Quote } from './quote';
 export class InMemoryDataService {
   createDb() {
     const quotes = [
-      { id: 1, text: 'this is a quote', source: 'just trust me'},
-      { id: 2, text: 'any number with a 7 in it is made up',
-        source: 'common sense'},
-      { id: 3, text: 'i hope ur having a lovely day',
-        source: 'reyna'}
+      { id: 1, text: 'Though with their high wrongs I am struck to the quick, yet, with my nobler reason, \'gainst my fury do I take part: the rarer action is in virtue than in vengeance.',
+        source: 'Prospero, The Tempest'},
+      { id: 2, text: 'Are zombies possible? They\'re not just possible, they\'re actual. We\'re all zombies. (It would be an act of desperate intellectual dishonesty to quote this assertion out of context!)', 
+        source: 'Daniel Dennett, Consciousness Explained'},
+      { id: 3, text: 'His death did not diminish life. Nor did it diminish him. He is there— there, not here! Here is nothing, dust and shadows. There, he is the earth and sunlight, the leaves of trees, the eagle\'s flight. He is alive.',
+        source: 'Ged, The Farthest Shore'}
     ];
     return {quotes};
   }
