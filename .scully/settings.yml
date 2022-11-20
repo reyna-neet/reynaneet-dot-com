@@ -1,0 +1,11 @@
+identifier: l0a2p9v7q8h5xbf2
+appPort: 1864
+staticPort: 1668
+reloadPort: 2667
+hostName: localhost
+projectName: reynaneet-dot-com
+homeFolder: /Users/reyna/Programs/reynaneet-dot-com
+distFolder: ./dist/reynaneet-dot-com
+outDir: /Users/reyna/Programs/reynaneet-dot-com/dist/static
+handle404: ''
+allowErrorCollect: true
