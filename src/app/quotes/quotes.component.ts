@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Location } from '@angular/common';
 import { AnimationEvent, animate, transition, 
          trigger, state, style } from '@angular/animations';
+import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { interval, Subscription } from 'rxjs';
 import { Quote } from '../quote';
 import { QuoteService } from '../quote.service';
@@ -37,7 +39,7 @@ export class QuotesComponent implements OnInit {
   QUOTE_CHANGE_DELAY = 10000;
 
   quotes: Quote[] = [];
-  displayQuoteIndex = 0;
+  displayQuoteIndex: number = 0;
   isVisible = true;
   quoteTimer: Subscription = {} as Subscription;
     
@@ -45,7 +47,23 @@ export class QuotesComponent implements OnInit {
     this.quoteService.getQuotes()
         .subscribe(quotes => this.quotes = quotes,
                   err => console.error('Error in Quotes component'),
-                  () => this.startTimer());
+                  () => this.specificQuote());
+  }
+
+  specificQuote(): void {
+    console.log("specificQuote called");
+    console.log(this.route);
+    if(this.route.snapshot.paramMap.get('i')){
+        console.log("entered option 1");
+        this.displayQuoteIndex = Number(this.route.snapshot.paramMap
+                                        .get('i'));
+    }
+    else {
+      console.log("entered option 2");
+      console.log(this.route.snapshot.paramMap);
+      this.displayQuoteIndex = 0;
+      this.startTimer();
+    }
   }
 
   startTimer(): void {
@@ -70,7 +88,11 @@ export class QuotesComponent implements OnInit {
     }
   }
 
-  constructor(private quoteService: QuoteService) { }
+  constructor(
+              private route: ActivatedRoute,
+              private quoteService: QuoteService,
+              private location: Location
+  )  { }
 
   ngOnInit(): void {
     this.fetchQuotes();
