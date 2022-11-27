@@ -11,12 +11,14 @@ import { AppComponent } from './app.component';
 import { TitleBlockComponent } from './title-block/title-block.component';
 import { QuotesComponent } from './quotes/quotes.component';
 import { InMemoryDataService } from './in-memory-data.service';
+import { NavigationListComponent } from './navigation-list/navigation-list.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     TitleBlockComponent,
     QuotesComponent,
+    NavigationListComponent,
   ],
   imports: [
     AppRoutingModule,
