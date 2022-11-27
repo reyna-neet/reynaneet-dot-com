@@ -1,12 +1,1 @@
-#quote-container {
-  font-size: 0.5em;
-}
 
-p {
-  margin-top: 0;
-  margin-bottom: 0;
-  width: 75vw;
-  @media (min-aspect-ratio: 5/4) {
-    width: 50vw;
-  }
-}
