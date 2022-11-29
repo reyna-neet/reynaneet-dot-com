@@ -1,3 +1,9 @@
+@use "global-variables" as g;
+
 body{
-  font-family: "EB Garamond", serif;
+  font-family: g.$basic-font;
+}
+
+@include g.all-h{
+  font-family: g.$accent-font;
 }
