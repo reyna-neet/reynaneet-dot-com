@@ -2,6 +2,8 @@
 
 body{
   font-family: g.$basic-font;
+  color: g.$color-text;
+  background-color: g.$color-bg;
 }
 
 @include g.all-h{
